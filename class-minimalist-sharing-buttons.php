@@ -167,7 +167,33 @@ class Minimalist_Sharing_Buttons extends \WP_Widget {
 
 		if ( file_exists( $scripts_path ) ) {
 			wp_register_script( 'msbwidget-scripts', $scripts_url, array(), MSBWIDGET_VERSION, true );
+			wp_localize_script(
+				'msbwidget-scripts',
+				'msbwidgetArgs',
+				array(
+					'jsonPath' => plugins_url( 'admin/json/social-networks.json', __FILE__ ),
+				)
+			);
 			wp_enqueue_script( 'msbwidget-scripts' );
+		}
+	}
+
+	/**
+	 * Retrieve the social networks list.
+	 *
+	 * @since 0.0.1
+	 *
+	 * @return array An array of social networks objects.
+	 */
+	public function msbwidget_get_social_networks() {
+		$social_networks_file     = plugin_dir_url( __FILE__ ) . 'admin/json/social-networks.json';
+		$social_networks_response = wp_remote_get( $social_networks_file );
+
+		if ( ! is_wp_error( $social_networks_response ) && isset( $social_networks_response['response']['code'] ) && 200 === $social_networks_response['response']['code'] ) {
+			$social_networks_body = wp_remote_retrieve_body( $social_networks_response );
+			$social_networks      = json_decode( $social_networks_body );
+
+			return $social_networks;
 		}
 	}
 
@@ -205,8 +231,13 @@ class Minimalist_Sharing_Buttons extends \WP_Widget {
 	 * @return array Updated settings to save.
 	 */
 	public function update( $new_instance, $old_instance ) {
+		$social_networks   = $this->msbwidget_get_social_networks();
 		$instance          = $old_instance;
 		$instance['title'] = sanitize_text_field( $new_instance['title'] );
+
+		foreach ( $social_networks as $social_network ) {
+			$instance['social_networks'][ $social_network->id ] = ( ! empty( $new_instance['social_networks'][ $social_network->id ] ) ? 1 : 0 );
+		}
 
 		return $instance;
 	}

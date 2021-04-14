@@ -1,0 +1,46 @@
+[
+	{
+		"id": "facebook",
+		"name": "Facebook",
+		"sharing_url": "https://www.facebook.com/sharer/sharer.php",
+		"parameters": {
+			"url": "u",
+			"title": "",
+			"content": "",
+			"image": ""
+		}
+	},
+	{
+		"id": "twitter",
+		"name": "Twitter",
+		"sharing_url": "https://twitter.com/intent/tweet",
+		"parameters": {
+			"url": "url",
+			"title": "text",
+			"content": "",
+			"image": ""
+		}
+	},
+	{
+		"id": "linkedin",
+		"name": "LinkedIn",
+		"sharing_url": "https://www.linkedin.com/sharing/share-offsite/",
+		"parameters": {
+			"url": "url",
+			"title": "",
+			"content": "",
+			"image": ""
+		}
+	},
+	{
+		"id": "email",
+		"name": "Email",
+		"sharing_url": "mailto:",
+		"parameters": {
+			"url": "",
+			"title": "subject",
+			"content": "body",
+			"image": ""
+		}
+	}
+]
