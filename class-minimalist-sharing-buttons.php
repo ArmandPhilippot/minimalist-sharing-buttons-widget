@@ -158,10 +158,14 @@ class Minimalist_Sharing_Buttons extends \WP_Widget {
 	 * @param string $hook_suffix The current admin page.
 	 */
 	public function msbwidget_enqueue_admin_scripts( $hook_suffix ) {
+		if ( 'widgets.php' !== $hook_suffix ) {
+			return;
+		}
+
 		$scripts_url  = plugins_url( 'admin/js/scripts.min.js', __FILE__ );
 		$scripts_path = plugin_dir_path( __FILE__ ) . 'admin/js/scripts.min.js';
 
-		if ( file_exists( $scripts_path && 'widgets.php' === $hook_suffix ) ) {
+		if ( file_exists( $scripts_path ) ) {
 			wp_register_script( 'msbwidget-scripts', $scripts_url, array(), MSBWIDGET_VERSION, true );
 			wp_enqueue_script( 'msbwidget-scripts' );
 		}
