@@ -30,7 +30,7 @@ if ( ! empty( $msbwidget_title ) ) {
 	echo wp_kses_post( $args['before_title'] ) . esc_html( $msbwidget_title ) . wp_kses_post( $args['after_title'] );
 }
 foreach ( $msbwidget_social_networks_list as $msbwidget_social_network ) {
-	if ( $msbwidget_social_networks[ $msbwidget_social_network->id ] ) {
+	if ( array_key_exists( $msbwidget_social_network->id, $msbwidget_social_networks ) && $msbwidget_social_networks[ $msbwidget_social_network->id ] ) {
 		$msbwidget_social_network_class       = 'msbwidget__btn msbwidget__btn--' . $msbwidget_social_network->id;
 		$msbwidget_social_network_sharing_url = $msbwidget_social_network->sharing_url;
 		$msbwidget_social_network_parameters  = (array) $msbwidget_social_network->parameters;
@@ -57,7 +57,6 @@ foreach ( $msbwidget_social_networks_list as $msbwidget_social_network ) {
 					$msbwidget_social_network_sharing_url .= $msbwidget_post_image;
 					break;
 				default:
-					// code...
 					break;
 			}
 
@@ -66,7 +65,15 @@ foreach ( $msbwidget_social_networks_list as $msbwidget_social_network ) {
 			}
 		}
 		?>
-		<a href="<?php echo esc_url( $msbwidget_social_network_sharing_url ); ?>" class="<?php echo esc_attr( $msbwidget_social_network_class ); ?>"><?php echo esc_html( $msbwidget_social_network->name ); ?></a>
+		<a href="<?php echo esc_url( $msbwidget_social_network_sharing_url ); ?>" class="<?php echo esc_attr( $msbwidget_social_network_class ); ?>">
+			<?php
+			if ( 'email' === $msbwidget_social_network->id ) {
+				echo esc_html_e( 'Email', 'minimalist-sharing-buttons' );
+			} else {
+				echo esc_html( $msbwidget_social_network->name );
+			}
+			?>
+		</a>
 		<?php
 	}
 }
