@@ -32,6 +32,6 @@ msgstr ""
 msgid "Select the buttons to display."
 msgstr ""
 
-#: public/partials/minimalist-sharing-buttons-public-display.php:71
+#: public/partials/minimalist-sharing-buttons-public-display.php:84
 msgid "Email"
 msgstr ""

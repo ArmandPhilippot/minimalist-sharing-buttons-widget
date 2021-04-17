@@ -1,5 +1,27 @@
 [
 	{
+		"id": "diaspora",
+		"name": "Diaspora*",
+		"sharing_url": "https://share.diasporafoundation.org/",
+		"parameters": {
+			"url": "url",
+			"title": "title",
+			"content": "",
+			"image": ""
+		}
+	},
+	{
+		"id": "email",
+		"name": "Email",
+		"sharing_url": "mailto:",
+		"parameters": {
+			"url": "",
+			"title": "subject",
+			"content": "body",
+			"image": ""
+		}
+	},
+	{
 		"id": "facebook",
 		"name": "Facebook",
 		"sharing_url": "https://www.facebook.com/sharer/sharer.php",
@@ -11,12 +33,23 @@
 		}
 	},
 	{
-		"id": "twitter",
-		"name": "Twitter",
-		"sharing_url": "https://twitter.com/intent/tweet",
+		"id": "journal-du-hacker",
+		"name": "Journal du Hacker",
+		"sharing_url": "https://www.journalduhacker.net/stories/new",
 		"parameters": {
 			"url": "url",
-			"title": "text",
+			"title": "title",
+			"content": "",
+			"image": ""
+		}
+	},
+	{
+		"id": "hacker-news",
+		"name": "Hacker News",
+		"sharing_url": "https://news.ycombinator.com/submitlink",
+		"parameters": {
+			"url": "u",
+			"title": "t",
 			"content": "",
 			"image": ""
 		}
@@ -33,13 +66,35 @@
 		}
 	},
 	{
-		"id": "email",
-		"name": "Email",
-		"sharing_url": "mailto:",
+		"id": "mastodon",
+		"name": "Mastodon",
+		"sharing_url": "",
 		"parameters": {
-			"url": "",
-			"title": "subject",
-			"content": "body",
+			"url": "url",
+			"title": "title",
+			"content": "",
+			"image": ""
+		}
+	},
+	{
+		"id": "reddit",
+		"name": "Reddit",
+		"sharing_url": "https://www.reddit.com/submit",
+		"parameters": {
+			"url": "url",
+			"title": "title",
+			"content": "",
+			"image": ""
+		}
+	},
+	{
+		"id": "twitter",
+		"name": "Twitter",
+		"sharing_url": "https://twitter.com/intent/tweet",
+		"parameters": {
+			"url": "url",
+			"title": "text",
+			"content": "",
 			"image": ""
 		}
 	}
