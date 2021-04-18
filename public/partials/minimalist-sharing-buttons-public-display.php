@@ -20,9 +20,9 @@ $msbwidget_title = apply_filters( 'widget_title', $msbwidget_title, $instance, $
 $msbwidget_social_networks_list = $this->msbwidget_get_social_networks();
 $msbwidget_social_networks      = ! empty( $instance['social_networks'] ) ? $instance['social_networks'] : array();
 
-$msbwidget_post_link    = rawurlencode( get_permalink() );
-$msbwidget_post_title   = rawurlencode( get_the_title() );
-$msbwidget_post_content = rawurlencode( get_the_excerpt() );
+$msbwidget_post_link    = get_permalink();
+$msbwidget_post_title   = get_the_title();
+$msbwidget_post_content = get_the_excerpt();
 $msbwidget_post_image   = get_the_post_thumbnail();
 
 echo wp_kses_post( $args['before_widget'] );
