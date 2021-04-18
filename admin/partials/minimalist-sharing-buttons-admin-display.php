@@ -30,10 +30,11 @@ $msbwidget_social_networks      = ! empty( $instance['social_networks'] ) ? $ins
 </p>
 <fieldset>
 	<legend><?php esc_html_e( 'Select the buttons to display.', 'minimalist-sharing-buttons' ); ?></legend>
+	<ul class="msbwidget__list">
 	<?php
 	foreach ( $msbwidget_social_networks_list as $msbwidget_social_network ) {
 		?>
-		<p>
+		<li class="msbwidget__item">
 			<label for="<?php echo esc_attr( $this->get_field_id( $msbwidget_social_network->id ) ); ?>">
 				<input
 					type="checkbox"
@@ -43,8 +44,9 @@ $msbwidget_social_networks      = ! empty( $instance['social_networks'] ) ? $ins
 				/>
 				<?php echo esc_html( $msbwidget_social_network->name ); ?>
 			</label>
-		</p>
+		</li>
 		<?php
 	}
 	?>
+	</ul>
 </fieldset>
