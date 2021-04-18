@@ -1,0 +1,33 @@
+/// Replace `$search` with `$replace` in `$string`
+/// @author Hugo Giraudel
+/// @param {String} $string - Initial string
+/// @param {String} $search - Substring to replace
+/// @param {String} $replace ('') - New value
+/// @return {String} - Updated string
+@function str-replace($string, $search, $replace: "") {
+	$index: str-index($string, $search);
+
+	@if $index {
+		@return str-slice($string, 1, $index - 1) + $replace +
+			str-replace(
+				str-slice($string, $index + str-length($search)),
+				$search,
+				$replace
+			);
+	}
+
+	@return $string;
+}
+
+/// Encode a SVG.
+/// @param {String} $svg A complete svg (`<svg>...</svg>`).
+/// @return The encoded svg, ready to use for background-image.
+@function encodeSvg($svg) {
+	$svg-encoding: (("<", "%3C"), (">", "%3E"), ("#", "%23"));
+
+	@each $char, $encoded in $svg-encoding {
+		$svg: str-replace($svg, $char, $encoded);
+	}
+
+	@return "data:image/svg+xml;utf8," + $svg;
+}
