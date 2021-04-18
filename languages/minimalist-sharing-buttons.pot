@@ -24,14 +24,27 @@ msgstr ""
 msgid "Minimalist Sharing Buttons"
 msgstr ""
 
-#: admin/partials/minimalist-sharing-buttons-admin-display.php:24
+#: admin/partials/minimalist-sharing-buttons-admin-display.php:25
 msgid "Title:"
 msgstr ""
 
-#: admin/partials/minimalist-sharing-buttons-admin-display.php:32
+#: admin/partials/minimalist-sharing-buttons-admin-display.php:33
 msgid "Select the buttons to display."
 msgstr ""
 
-#: public/partials/minimalist-sharing-buttons-public-display.php:84
+#: admin/partials/minimalist-sharing-buttons-admin-display.php:55
+msgid "Mastodon configuration:"
+msgstr ""
+
+#. translators: %s A link.
+#: admin/partials/minimalist-sharing-buttons-admin-display.php:60
+msgid "In order to use the Mastodon button, you need to provide an API key. You can generate one on %s"
+msgstr ""
+
+#: admin/partials/minimalist-sharing-buttons-admin-display.php:66
+msgid "Mastodon API Key:"
+msgstr ""
+
+#: public/partials/minimalist-sharing-buttons-public-display.php:85
 msgid "Email"
 msgstr ""

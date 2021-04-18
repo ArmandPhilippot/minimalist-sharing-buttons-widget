@@ -198,6 +198,24 @@ class Minimalist_Sharing_Buttons extends \WP_Widget {
 	}
 
 	/**
+	 * Write the Mastodon API Key in a file to share it with Mastodon Button
+	 * Sharing.
+	 *
+	 * @since 0.0.1
+	 *
+	 * @param string $api_key The Mastodon API Key.
+	 */
+	public function msbwidget_set_mastodon_api_key( $api_key ) {
+		$mastodon_api_key = ( ! empty( $api_key ) ) ? $api_key : '';
+		$file_path        = plugin_dir_path( __FILE__ ) . 'public/cache/api-key.php';
+		$handle           = fopen( $file_path, 'w' );
+		fwrite( $handle, "<?php\n" );
+		fwrite( $handle, "\$msbwidget_api_key = '" . $mastodon_api_key . "';\n\n" );
+		fwrite( $handle, 'return $msbwidget_api_key;' );
+		fclose( $handle );
+	}
+
+	/**
 	 * Outputs the content for the current Minimalist_Sharing_Buttons widget instance.
 	 *
 	 * @since 0.0.1
@@ -238,6 +256,9 @@ class Minimalist_Sharing_Buttons extends \WP_Widget {
 		foreach ( $social_networks as $social_network ) {
 			$instance['social_networks'][ $social_network->id ] = ( ! empty( $new_instance['social_networks'][ $social_network->id ] ) ? 1 : 0 );
 		}
+
+		$instance['mastodon_api_key'] = sanitize_text_field( $new_instance['mastodon_api_key'] );
+		$this->msbwidget_set_mastodon_api_key( $instance['mastodon_api_key'] );
 
 		return $instance;
 	}
