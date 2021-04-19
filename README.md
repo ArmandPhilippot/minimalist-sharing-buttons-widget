@@ -31,13 +31,15 @@ You can use Composer to install this plugin as a dependency if you use `wordpres
 ```
 {
 "require": {
-    "armandphilippot/minimalist-sharing-buttons": "dev-master"
+    "armandphilippot/minimalist-sharing-buttons": "dev-main"
 }
 "repositories": [{
     "type": "git",
     "url": "git@github.com:ArmandPhilippot/minimalist-sharing-buttons.git"
 }]
 ```
+
+You can specify the version by adding the corresponding tag: `dev-main#v1.0.0`.
 
 ### Manual installation
 
