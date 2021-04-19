@@ -24,9 +24,9 @@ The available websites are:
 
 ## Install
 
-### Composer install
+### Composer installation
 
-You can use Composer to install this plugin as a dependency if you use custom installers:
+You can use Composer to install this plugin as a dependency if you use `wordpress-plugin` installers:
 
 ```
 {
@@ -39,7 +39,7 @@ You can use Composer to install this plugin as a dependency if you use custom in
 }]
 ```
 
-### Manual install
+### Manual installation
 
 You can download this plugin on Github, then extract it in `/wp-content/plugins/` directory.
 
@@ -48,9 +48,9 @@ You can download this plugin on Github, then extract it in `/wp-content/plugins/
 1. Navigate to the "_Plugins_" dashboard page and click on "_Activate_".
 2. Add "_**Minimalist Sharing Buttons**_" to a widget area through the "_Widgets_" menu in WordPress.
 3. Choose the buttons you want to display.
-4. (optional) If you want to display the Mastodon button, you need to provide an API key. You can generate one on [instances.social](https://instances.social/api/token).
+4. (optional) If you want to display the Mastodon button, you need to provide an API token. You can generate one on [instances.social](https://instances.social/api/token).
 
-Minimalist Sharing Buttons uses [Mastodon Sharing Button](https://github.com/ArmandPhilippot/mastodon-sharing-button) to provide a Mastodon button. By setting an API, it will be share with the other project (locally, nothing goes elsewhere) to generate a valid list of instances. This instances list is used to validate the user input and to provide suggestions to the user.
+Minimalist Sharing Buttons uses [Mastodon Sharing Button](https://github.com/ArmandPhilippot/mastodon-sharing-button) to provide a Mastodon button. By setting an API token, it will be share with the other project (locally, nothing goes elsewhere) to generate a valid list of instances. This instances list is used to validate the user input and to provide suggestions to the user.
 
 ## Screenshots
 
@@ -70,9 +70,9 @@ You may need to declare some styles to integrate the plugin in your theme. For e
 
 I use `!important` on links `color`. Without it, some themes overwrite the color with complex selectors. By doing this, the plugin is usable on a large selection of themes but I haven't test everywhere.
 
-The widget uses Javascript to open a popup when the user click on a button. But, it works also with scripts disabled.
+The widget uses Javascript to open a popup when the user click on a button. But, it works also with scripts disabled. It's a simple link.
 
-## License
+## Licenses
 
 This project is open source and available under the [GPL v2 or later License](https://github.com/ArmandPhilippot/minimalist-sharing-buttons-widget/blob/master/LICENSE).
 
