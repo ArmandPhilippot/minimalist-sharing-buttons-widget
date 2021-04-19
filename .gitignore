@@ -12,3 +12,6 @@ certs
 # Files to ignore
 *.map
 *.zip
+
+# Ignore API token
+public/cache/api-token.php

@@ -1,4 +1,0 @@
-<?php
-$msbwidget_api_key = 'jK2MqP3O5bR9jhiKBykXiMf38bJ30jWRhTaXRLlXCUAcgPW9KySYdJ0zOTVllElMMxe8wyc0LudjrcvhhC7r1pI5naUT76Oc4GfUeb6Dy7hOl1Po0hYxe5zpl6uGFiHa';
-
-return $msbwidget_api_key;
