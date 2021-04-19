@@ -31,11 +31,11 @@ You can use Composer to install this plugin as a dependency if you use `wordpres
 ```
 {
 "require": {
-    "armandphilippot/minimalist-sharing-buttons": "dev-main"
+    "armandphilippot/minimalist-sharing-buttons-widget": "dev-main"
 }
 "repositories": [{
     "type": "git",
-    "url": "git@github.com:ArmandPhilippot/minimalist-sharing-buttons.git"
+    "url": "git@github.com:ArmandPhilippot/minimalist-sharing-buttons-widget.git"
 }]
 ```
 
@@ -76,6 +76,6 @@ The widget uses Javascript to open a popup when the user click on a button. But,
 
 ## Licenses
 
-This project is open source and available under the [GPL v2 or later License](https://github.com/ArmandPhilippot/minimalist-sharing-buttons-widget/blob/master/LICENSE).
+This project is open source and available under the [GPL v2 or later License](https://github.com/ArmandPhilippot/minimalist-sharing-buttons-widget/blob/main/LICENSE).
 
 This project uses [Mastodon Sharing Button](https://github.com/ArmandPhilippot/mastodon-sharing-button) which is licensed under the MIT license.
