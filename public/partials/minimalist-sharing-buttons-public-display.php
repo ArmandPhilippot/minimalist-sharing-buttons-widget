@@ -14,9 +14,8 @@ if ( ! defined( 'ABSPATH' ) ) {
 	exit;
 }
 
-$msbwidget_title            = ! empty( $instance['title'] ) ? $instance['title'] : '';
-$msbwidget_title            = apply_filters( 'widget_title', $msbwidget_title, $instance, $this->id_base );
-$msbwidget_mastodon_api_key = ! empty( $instance['mastodon_api_key'] ) ? $instance['mastodon_api_key'] : '';
+$msbwidget_title = ! empty( $instance['title'] ) ? $instance['title'] : '';
+$msbwidget_title = apply_filters( 'widget_title', $msbwidget_title, $instance, $this->id_base );
 
 $msbwidget_social_networks_list = $this->msbwidget_get_social_networks();
 $msbwidget_social_networks      = ! empty( $instance['social_networks'] ) ? $instance['social_networks'] : array();

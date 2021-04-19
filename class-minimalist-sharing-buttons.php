@@ -198,20 +198,20 @@ class Minimalist_Sharing_Buttons extends \WP_Widget {
 	}
 
 	/**
-	 * Write the Mastodon API Key in a file to share it with Mastodon Button
+	 * Write the Mastodon API Token in a file to share it with Mastodon Button
 	 * Sharing.
 	 *
 	 * @since 0.0.1
 	 *
-	 * @param string $api_key The Mastodon API Key.
+	 * @param string $api_token The Mastodon API Token.
 	 */
-	public function msbwidget_set_mastodon_api_key( $api_key ) {
-		$mastodon_api_key = ( ! empty( $api_key ) ) ? $api_key : '';
-		$file_path        = plugin_dir_path( __FILE__ ) . 'public/cache/api-key.php';
-		$handle           = fopen( $file_path, 'w' );
+	public function msbwidget_set_mastodon_api_token( $api_token ) {
+		$mastodon_api_token = ( ! empty( $api_token ) ) ? $api_token : '';
+		$file_path          = plugin_dir_path( __FILE__ ) . 'public/cache/api-token.php';
+		$handle             = fopen( $file_path, 'w' );
 		fwrite( $handle, "<?php\n" );
-		fwrite( $handle, "\$msbwidget_api_key = '" . $mastodon_api_key . "';\n\n" );
-		fwrite( $handle, 'return $msbwidget_api_key;' );
+		fwrite( $handle, "\$msbwidget_api_token = '" . $mastodon_api_token . "';\n\n" );
+		fwrite( $handle, 'return $msbwidget_api_token;' );
 		fclose( $handle );
 	}
 
@@ -257,8 +257,8 @@ class Minimalist_Sharing_Buttons extends \WP_Widget {
 			$instance['social_networks'][ $social_network->id ] = ( ! empty( $new_instance['social_networks'][ $social_network->id ] ) ? 1 : 0 );
 		}
 
-		$instance['mastodon_api_key'] = sanitize_text_field( $new_instance['mastodon_api_key'] );
-		$this->msbwidget_set_mastodon_api_key( $instance['mastodon_api_key'] );
+		$instance['mastodon_api_token'] = sanitize_text_field( $new_instance['mastodon_api_token'] );
+		$this->msbwidget_set_mastodon_api_token( $instance['mastodon_api_token'] );
 
 		return $instance;
 	}
