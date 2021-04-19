@@ -208,11 +208,12 @@ class Minimalist_Sharing_Buttons extends \WP_Widget {
 	public function msbwidget_set_mastodon_api_token( $api_token ) {
 		$mastodon_api_token = ( ! empty( $api_token ) ) ? $api_token : '';
 		$file_path          = plugin_dir_path( __FILE__ ) . 'public/cache/api-token.php';
-		$handle             = fopen( $file_path, 'w' );
-		fwrite( $handle, "<?php\n" );
-		fwrite( $handle, "\$msbwidget_api_token = '" . $mastodon_api_token . "';\n\n" );
-		fwrite( $handle, 'return $msbwidget_api_token;' );
-		fclose( $handle );
+
+		$handle = fopen( $file_path, 'w' ); // phpcs:ignore WordPress.WP.AlternativeFunctions.file_system_read_fopen
+		fwrite( $handle, "<?php\n" ); // phpcs:ignore WordPress.WP.AlternativeFunctions.file_system_read_fwrite
+		fwrite( $handle, "\$msbwidget_api_token = '" . $mastodon_api_token . "';\n\n" ); // phpcs:ignore WordPress.WP.AlternativeFunctions.file_system_read_fwrite
+		fwrite( $handle, 'return $msbwidget_api_token;' ); // phpcs:ignore WordPress.WP.AlternativeFunctions.file_system_read_fwrite
+		fclose( $handle ); // phpcs:ignore WordPress.WP.AlternativeFunctions.file_system_read_fclose
 	}
 
 	/**
