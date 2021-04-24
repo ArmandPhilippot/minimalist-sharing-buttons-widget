@@ -31,6 +31,11 @@ $msbwidget_mastodon_api_token   = ! empty( $instance['mastodon_api_token'] ) ? $
 </p>
 <fieldset>
 	<legend><?php esc_html_e( 'Select the buttons to display.', 'minimalist-sharing-buttons' ); ?></legend>
+	<?php
+	if ( empty( $msbwidget_social_networks_list ) ) {
+		echo '<p>' . esc_html__( 'Error: the social networks list could not read.', 'minimalist-sharing-buttons' ) . '</p>';
+	}
+	?>
 	<ul class="msbwidget__list">
 	<?php
 	foreach ( $msbwidget_social_networks_list as $msbwidget_social_network ) {

@@ -23,6 +23,14 @@ msgstr ""
 "X-Poedit-SearchPath-0: .\n"
 "X-Poedit-SearchPathExcluded-0: *.js\n"
 
+#: class-minimalist-sharing-buttons.php:60
+msgid "Display sharing buttons as a widget."
+msgstr "Afficher les boutons de partage en tant que widget."
+
+#: class-minimalist-sharing-buttons.php:65
+msgid "Minimalist Sharing Buttons"
+msgstr "Boutons de Partage Minimalistes"
+
 #: admin/partials/minimalist-sharing-buttons-admin-display.php:25
 msgid "Title:"
 msgstr "Titre :"
@@ -31,12 +39,16 @@ msgstr "Titre :"
 msgid "Select the buttons to display."
 msgstr "Sélectionner les boutons à afficher."
 
-#: admin/partials/minimalist-sharing-buttons-admin-display.php:55
+#: admin/partials/minimalist-sharing-buttons-admin-display.php:36
+msgid "Error: the social networks list could not read."
+msgstr "Erreur : la liste des réseaux sociaux n'a pu être lu."
+
+#: admin/partials/minimalist-sharing-buttons-admin-display.php:60
 msgid "Mastodon configuration:"
 msgstr "Configuration de Mastodon :"
 
-#: admin/partials/minimalist-sharing-buttons-admin-display.php:60
-#, php-format
+#. translators: %s A link.
+#: admin/partials/minimalist-sharing-buttons-admin-display.php:65
 msgid ""
 "In order to use the Mastodon button, you need to provide an API token. You "
 "can generate one on %s"
@@ -44,17 +56,9 @@ msgstr ""
 "Pour faire fonctionner le bouton Mastodon, vous devez fournir un token pour "
 "utiliser l'API. Vous pouvez en générer un sur %s"
 
-#: admin/partials/minimalist-sharing-buttons-admin-display.php:66
+#: admin/partials/minimalist-sharing-buttons-admin-display.php:71
 msgid "Mastodon API token:"
 msgstr "Token de l'API de Mastodon :"
-
-#: class-minimalist-sharing-buttons.php:60
-msgid "Display sharing buttons as a widget."
-msgstr "Afficher les boutons de partage en tant que widget."
-
-#: class-minimalist-sharing-buttons.php:65
-msgid "Minimalist Sharing Buttons"
-msgstr "Boutons de Partage Minimalistes"
 
 #: public/partials/minimalist-sharing-buttons-public-display.php:84
 msgid "Email"

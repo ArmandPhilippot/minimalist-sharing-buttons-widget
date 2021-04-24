@@ -194,6 +194,8 @@ class Minimalist_Sharing_Buttons extends \WP_Widget {
 			$social_networks      = json_decode( $social_networks_body );
 
 			return $social_networks;
+		} else {
+			return array();
 		}
 	}
 
