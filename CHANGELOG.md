@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [1.0.1](https://github.com/ArmandPhilippot/minimalist-sharing-buttons-widget/compare/v1.0.0...v1.0.1) (2021-04-24)
+
+
+### Bug Fixes
+
+* handle case where the social networks list cannot be read ([c66cf7f](https://github.com/ArmandPhilippot/minimalist-sharing-buttons-widget/commit/c66cf7f307c87c2b5a1fa7d96c57c50a989cc5e5))
+
 ## [1.0.0](https://github.com/ArmandPhilippot/minimalist-sharing-buttons-widget/compare/v0.0.1...v1.0.0) (2021-04-19)
 
 
