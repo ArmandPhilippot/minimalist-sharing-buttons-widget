@@ -12,7 +12,7 @@
  */
 
 // Load API token registered from MSBWidget.
-require dirname( __FILE__ ) . '/../cache/api-token.php';
+require dirname( __DIR__ ) . '/cache/api-token.php';
 
 /**
  * The Mastodon Sharing Button use the instances.social API. In order, to use
@@ -26,7 +26,7 @@ $msb_token_key = $msbwidget_api_token ? $msbwidget_api_token : '';
 /**
  * The path where the cached instances list must be written.
  */
-$msb_instances_path = dirname( __FILE__ ) . '/../cache/instances-list.php';
+$msb_instances_path = dirname( __DIR__ ) . '/cache/instances-list.php';
 
 /**
  * The Mastodon Sharing Button will check if the HTTP accepted locales have a

@@ -78,6 +78,7 @@ if ( ! empty( $msbwidget_title ) ) {
 				<a
 					href="<?php echo esc_url( $msbwidget_social_network_sharing_url ); ?>"
 					class="<?php echo esc_attr( $msbwidget_social_network_class ); ?>"
+					rel="nofollow"
 				>
 					<?php
 					if ( 'email' === $msbwidget_social_network->id ) {
