@@ -25,7 +25,10 @@
 		"release": "standard-version -a",
 		"translate": "gulp translate",
 		"zip": "gulp zipWidget",
-		"prepare": "husky install"
+		"lint": "npm-run-all --parallel lint:*",
+		"lint:scss": "stylelint \"**/*.scss\" --syntax scss",
+		"lint:js": "eslint --ext .js,.jsx",
+		"lint:php": "composer lint"
 	},
 	"devDependencies": {
 		"@babel/core": "^7.12.9",

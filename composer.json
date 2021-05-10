@@ -30,7 +30,7 @@
 		"dealerdirect/phpcodesniffer-composer-installer": "^0.7.0"
 	},
 	"scripts": {
-		"lint": "phpcs --standard=WordPress",
-		"fix": "phpcbf --standard=WordPress"
+		"lint": "phpcs --standard=phpcs.xml",
+		"fix": "phpcbf --standard=phpcs.xml"
 	}
 }

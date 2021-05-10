@@ -1,11 +1,13 @@
 <?xml version="1.0"?>
 <ruleset name="WordPress Coding Standards">
-	<description>PHPCS Ruleset for WordPress Themes.</description>
+	<description>PHPCS Ruleset for WordPress development.</description>
 	<!-- Check files in this directory and subdirectories. -->
 	<file>.</file>
 	<!-- Exclude some directories. -->
 	<exclude-pattern>*/vendor/*</exclude-pattern>
 	<exclude-pattern>*/node_modules/*</exclude-pattern>
+	<exclude-pattern>./public/mastodon-sharing-button</exclude-pattern>
+	<exclude-pattern>./public/cache</exclude-pattern>
 	<!-- Pass flags to PHPCS:
 		p: Show progress of the run.
 		s: Show sniff codes in all reports.
@@ -15,7 +17,7 @@
 	<!-- Strip the filepaths down to the relevant bit. Disabled, bug with VSCode. -->
 	<!-- <arg name="basepath" value="./"/> -->
 	<!-- Only check PHP files. -->
-	<arg name="extensions" value="php,css,scss/css"/>
+	<arg name="extensions" value="php"/>
 	<!-- Use the WordPress ruleset -->
 	<rule ref="WordPress" />
 	<!-- Verify that no WP functions are used which are deprecated or removed. -->
