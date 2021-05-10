@@ -21,62 +21,72 @@
 /**
  * Load Gulp configuration and error handler.
  */
-const config = require('./gulp/config');
-const errorHandler = require('./gulp/error-handler');
+const config = require( './gulp/config' );
+const errorHandler = require( './gulp/error-handler' );
 
 /**
  * Load Gulp plugins.
  */
 /* CSS */
-const { src, dest, watch, series, parallel, lastRun } = require('gulp');
-const sass = require('gulp-sass');
-const postcss = require('gulp-postcss');
-const sorting = require('postcss-sorting');
-const autoprefixer = require('autoprefixer');
-const cleanCSS = require('gulp-clean-css');
-const rtl = require('gulp-rtlcss');
+const { src, dest, watch, series, parallel, lastRun } = require( 'gulp' );
+const sass = require( 'gulp-sass' );
+const postcss = require( 'gulp-postcss' );
+const sorting = require( 'postcss-sorting' );
+const autoprefixer = require( 'autoprefixer' );
+const cleanCSS = require( 'gulp-clean-css' );
+const rtl = require( 'gulp-rtlcss' );
 
 /* JS */
-const babel = require('gulp-babel');
-const concat = require('gulp-concat');
-const uglify = require('gulp-uglify');
+const babel = require( 'gulp-babel' );
+const concat = require( 'gulp-concat' );
+const uglify = require( 'gulp-uglify' );
 
 /* Images */
-const imagemin = require('gulp-imagemin');
+const imagemin = require( 'gulp-imagemin' );
 
 /* Translation */
-const pot = require('gulp-wp-pot');
+const pot = require( 'gulp-wp-pot' );
 
 /* Live reload */
-const browserSync = require('browser-sync');
+const browserSync = require( 'browser-sync' );
 const server = browserSync.create();
 const reload = browserSync.reload;
 
 /* Utilities */
-const del = require('del');
-const filter = require('gulp-filter');
-const fs = require('fs');
-const lec = require('gulp-line-ending-corrector');
-const notify = require('gulp-notify');
-const { pipeline } = require('stream');
-const rename = require('gulp-rename');
-const replace = require('gulp-replace');
-const vinylPaths = require('vinyl-paths');
-const zip = require('gulp-zip');
+const del = require( 'del' );
+const filter = require( 'gulp-filter' );
+const fs = require( 'fs' );
+const lec = require( 'gulp-line-ending-corrector' );
+const notify = require( 'gulp-notify' );
+const { pipeline } = require( 'stream' );
+const rename = require( 'gulp-rename' );
+const replace = require( 'gulp-replace' );
+const vinylPaths = require( 'vinyl-paths' );
+const zip = require( 'gulp-zip' );
 
 /**
  * Load package.json data.
  */
-const package = JSON.parse(fs.readFileSync('./package.json'));
-const packageVersion = package.version;
+const packageJson = JSON.parse( fs.readFileSync( './package.json' ) );
+const packageVersion = packageJson.version;
+
+/**
+ * This callback type is called `doneCallback` and is displayed as a global symbol.
+ *
+ * @callback doneCallback
+ * @param {number} responseCode
+ * @param {string} responseMessage
+ */
 
 /**
  * Task: `serve`
  *
  * Init BrowserSync for live reloading.
+ *
+ * @param {doneCallback} done The callback that handle the response.
  */
-function serve(done) {
-	browserSync.init(config.browserSync);
+function serve( done ) {
+	browserSync.init( config.browserSync );
 	done();
 }
 
@@ -84,9 +94,11 @@ function serve(done) {
  * Task: `clean`
  *
  * Delete all generated assets.
+ *
+ * @param {doneCallback} done The callback that handle the response.
  */
-function clean(done) {
-	del.sync(config.clean.paths);
+function clean( done ) {
+	del.sync( config.clean.paths );
 	done();
 }
 
@@ -99,27 +111,27 @@ function clean(done) {
 function publicStyles() {
 	return pipeline(
 		[
-			src(config.styles.src.public, { sourcemaps: true }),
-			sass(config.styles.sassOptions),
+			src( config.styles.src.public, { sourcemaps: true } ),
+			sass( config.styles.sassOptions ),
 			postcss(
-				[sorting(config.styles.postCss.sortingOptions)],
-				[autoprefixer()]
+				[ sorting( config.styles.postCss.sortingOptions ) ],
+				[ autoprefixer() ]
 			),
 			lec(),
-			rename('style.css'),
-			dest(config.styles.dest.public),
-			filter('**/*.css'),
-			rename({ suffix: '.min' }),
+			rename( 'style.css' ),
+			dest( config.styles.dest.public ),
+			filter( '**/*.css' ),
+			rename( { suffix: '.min' } ),
 			cleanCSS(),
 			lec(),
-			dest(config.styles.dest.public, { sourcemaps: '.' }),
+			dest( config.styles.dest.public, { sourcemaps: '.' } ),
 			server.stream(),
-			notify({
+			notify( {
 				title: 'publicStyles task complete',
 				message:
 					'style.css and style.min.css have been compiled and moved to the public folder.',
 				onLast: config.notify.onLastOption,
-			}),
+			} ),
 		],
 		errorHandler
 	);
@@ -134,28 +146,28 @@ function publicStyles() {
 function publicRtlStyles() {
 	return pipeline(
 		[
-			src(config.styles.src.public, { sourcemaps: true }),
-			sass(config.styles.sassOptions),
+			src( config.styles.src.public, { sourcemaps: true } ),
+			sass( config.styles.sassOptions ),
 			postcss(
-				[sorting(config.styles.postCss.sortingOptions)],
-				[autoprefixer()]
+				[ sorting( config.styles.postCss.sortingOptions ) ],
+				[ autoprefixer() ]
 			),
 			lec(),
-			rename('style-rtl.css'),
+			rename( 'style-rtl.css' ),
 			rtl(),
-			dest(config.styles.dest.public),
-			filter('**/*.css'),
-			rename({ suffix: '.min' }),
+			dest( config.styles.dest.public ),
+			filter( '**/*.css' ),
+			rename( { suffix: '.min' } ),
 			cleanCSS(),
 			lec(),
-			dest(config.styles.dest.public, { sourcemaps: '.' }),
+			dest( config.styles.dest.public, { sourcemaps: '.' } ),
 			server.stream(),
-			notify({
+			notify( {
 				title: 'publicRtlStyles task complete',
 				message:
 					'style-rtl.css and style-rtl.min.css have been compiled and moved to the public folder.',
 				onLast: config.notify.onLastOption,
-			}),
+			} ),
 		],
 		errorHandler
 	);
@@ -170,27 +182,27 @@ function publicRtlStyles() {
 function adminStyles() {
 	return pipeline(
 		[
-			src(config.styles.src.admin, { sourcemaps: true }),
-			sass(config.styles.sassOptions),
+			src( config.styles.src.admin, { sourcemaps: true } ),
+			sass( config.styles.sassOptions ),
 			postcss(
-				[sorting(config.styles.postCss.sortingOptions)],
-				[autoprefixer()]
+				[ sorting( config.styles.postCss.sortingOptions ) ],
+				[ autoprefixer() ]
 			),
 			lec(),
-			rename('style.css'),
-			dest(config.styles.dest.admin),
-			filter('**/*.css'),
-			rename({ suffix: '.min' }),
+			rename( 'style.css' ),
+			dest( config.styles.dest.admin ),
+			filter( '**/*.css' ),
+			rename( { suffix: '.min' } ),
 			cleanCSS(),
 			lec(),
-			dest(config.styles.dest.admin, { sourcemaps: '.' }),
+			dest( config.styles.dest.admin, { sourcemaps: '.' } ),
 			server.stream(),
-			notify({
+			notify( {
 				title: 'adminStyles task complete',
 				message:
 					'style.css and style.min.css have been compiled and moved to the admin folder.',
 				onLast: config.notify.onLastOption,
-			}),
+			} ),
 		],
 		errorHandler
 	);
@@ -205,28 +217,28 @@ function adminStyles() {
 function adminRtlStyles() {
 	return pipeline(
 		[
-			src(config.styles.src.admin, { sourcemaps: true }),
-			sass(config.styles.sassOptions),
+			src( config.styles.src.admin, { sourcemaps: true } ),
+			sass( config.styles.sassOptions ),
 			postcss(
-				[sorting(config.styles.postCss.sortingOptions)],
-				[autoprefixer()]
+				[ sorting( config.styles.postCss.sortingOptions ) ],
+				[ autoprefixer() ]
 			),
 			lec(),
-			rename('style-rtl.css'),
+			rename( 'style-rtl.css' ),
 			rtl(),
-			dest(config.styles.dest.admin),
-			filter('**/*.css'),
-			rename({ suffix: '.min' }),
+			dest( config.styles.dest.admin ),
+			filter( '**/*.css' ),
+			rename( { suffix: '.min' } ),
 			cleanCSS(),
 			lec(),
-			dest(config.styles.dest.admin, { sourcemaps: '.' }),
+			dest( config.styles.dest.admin, { sourcemaps: '.' } ),
 			server.stream(),
-			notify({
+			notify( {
 				title: 'adminRtlStyles task complete',
 				message:
 					'style-rtl.css and style-rtl.min.css have been compiled and moved to the admin folder.',
 				onLast: config.notify.onLastOption,
-			}),
+			} ),
 		],
 		errorHandler
 	);
@@ -241,22 +253,22 @@ function adminRtlStyles() {
 function publicScripts() {
 	return pipeline(
 		[
-			src(config.scripts.src.public, { sourcemaps: true }),
+			src( config.scripts.src.public, { sourcemaps: true } ),
 			babel(),
-			concat('scripts.js'),
+			concat( 'scripts.js' ),
 			lec(),
-			dest(config.scripts.dest.public),
-			rename({ suffix: '.min' }),
+			dest( config.scripts.dest.public ),
+			rename( { suffix: '.min' } ),
 			uglify(),
 			lec(),
-			dest(config.scripts.dest.public, { sourcemaps: '.' }),
+			dest( config.scripts.dest.public, { sourcemaps: '.' } ),
 			server.stream(),
-			notify({
+			notify( {
 				title: 'publicScripts task complete',
 				message:
 					'scripts.js and scripts.min.js have been compiled and moved to the public folder.',
 				onLast: config.notify.onLastOption,
-			}),
+			} ),
 		],
 		errorHandler
 	);
@@ -271,22 +283,22 @@ function publicScripts() {
 function adminScripts() {
 	return pipeline(
 		[
-			src(config.scripts.src.admin, { sourcemaps: true }),
+			src( config.scripts.src.admin, { sourcemaps: true } ),
 			babel(),
-			concat('scripts.js'),
+			concat( 'scripts.js' ),
 			lec(),
-			dest(config.scripts.dest.admin),
-			rename({ suffix: '.min' }),
+			dest( config.scripts.dest.admin ),
+			rename( { suffix: '.min' } ),
 			uglify(),
 			lec(),
-			dest(config.scripts.dest.admin, { sourcemaps: '.' }),
+			dest( config.scripts.dest.admin, { sourcemaps: '.' } ),
 			server.stream(),
-			notify({
+			notify( {
 				title: 'adminScripts task complete',
 				message:
 					'scripts.js and scripts.min.js have been compiled and moved to the admin folder.',
 				onLast: config.notify.onLastOption,
-			}),
+			} ),
 		],
 		errorHandler
 	);
@@ -297,25 +309,25 @@ function adminScripts() {
  *
  * Compress images (png, jpg, gif, svg) and move them to the public folder.
  */
-function images(done) {
+function images() {
 	return pipeline(
 		[
-			src(config.images.src, { since: lastRun(images) }),
-			imagemin([
-				imagemin.gifsicle(config.images.imageminOptions.gif),
-				imagemin.mozjpeg(config.images.imageminOptions.jpg),
-				imagemin.optipng(config.images.imageminOptions.png),
-				imagemin.svgo(config.images.imageminOptions.svg),
-			]),
-			dest(config.images.dest),
-			notify({
+			src( config.images.src, { since: lastRun( images ) } ),
+			imagemin( [
+				imagemin.gifsicle( config.images.imageminOptions.gif ),
+				imagemin.mozjpeg( config.images.imageminOptions.jpg ),
+				imagemin.optipng( config.images.imageminOptions.png ),
+				imagemin.svgo( config.images.imageminOptions.svg ),
+			] ),
+			dest( config.images.dest ),
+			notify( {
 				title: 'Images task complete',
 				message:
 					'Images have been compressed and moved to the public folder.',
 				onLast: config.notify.onLastOption,
-			}),
+			} ),
 		],
-		done()
+		errorHandler
 	);
 }
 
@@ -324,17 +336,17 @@ function images(done) {
  *
  * Move fonts from src folder to public folder.
  */
-function moveFonts(done) {
+function moveFonts() {
 	return pipeline(
 		[
-			src(config.fonts.src),
-			dest(config.fonts.dest),
-			notify({
+			src( config.fonts.src ),
+			dest( config.fonts.dest ),
+			notify( {
 				title: 'moveFonts task complete',
 				message: 'Fonts have been moved to the public folder.',
-			}),
+			} ),
 		],
-		done()
+		errorHandler
 	);
 }
 
@@ -343,18 +355,18 @@ function moveFonts(done) {
  *
  * Generate a pot file for translation.
  */
-function compilePotFile(done) {
+function compilePotFile() {
 	return pipeline(
 		[
-			src(config.translation.src),
-			pot(config.translation.potOptions),
-			dest(config.translation.dest + '/' + config.translation.filename),
-			notify({
+			src( config.translation.src ),
+			pot( config.translation.potOptions ),
+			dest( config.translation.dest + '/' + config.translation.filename ),
+			notify( {
 				title: 'compilePotFile task complete',
 				message: 'POT file have been generated.',
-			}),
+			} ),
 		],
-		done()
+		errorHandler
 	);
 }
 
@@ -363,18 +375,18 @@ function compilePotFile(done) {
  *
  * Generate a zip version of the theme without development files.
  */
-function zipWidget(done) {
+function zipWidget() {
 	return pipeline(
 		[
-			src(config.zip.src),
-			zip(config.zip.filename),
-			dest(config.zip.dest),
-			notify({
+			src( config.zip.src ),
+			zip( config.zip.filename ),
+			dest( config.zip.dest ),
+			notify( {
 				title: 'zipWidget task complete',
 				message: 'Widget have been zipped.',
-			}),
+			} ),
 		],
-		done()
+		errorHandler
 	);
 }
 
@@ -383,16 +395,16 @@ function zipWidget(done) {
  *
  * Copy package.json version in Sass variable and recompile CSS.
  */
-function bumpCSS(done) {
+function bumpCSS() {
 	return pipeline(
 		[
-			src(config.bump.styles.src),
-			replace(/widget_version: "(.{5})"/g, function () {
+			src( config.bump.styles.src ),
+			replace( /widget_version: "(.{5})"/g, function () {
 				return 'widget_version: "' + packageVersion + '"';
-			}),
-			dest(config.bump.styles.dest),
+			} ),
+			dest( config.bump.styles.dest ),
 		],
-		done()
+		errorHandler
 	);
 }
 
@@ -401,19 +413,19 @@ function bumpCSS(done) {
  *
  * Copy package.json version in functions.php.
  */
-function bumpPHP(done) {
+function bumpPHP() {
 	return pipeline(
 		[
-			src(config.bump.php.src),
-			replace(/Version:           (.{5})/g, function () {
+			src( config.bump.php.src ),
+			replace( /Version:           (.{5})/g, function () {
 				return 'Version:           ' + packageVersion;
-			}),
-			replace(/_VERSION', '(.{5})'/g, function () {
+			} ),
+			replace( /_VERSION', '(.{5})'/g, function () {
 				return "_VERSION', '" + packageVersion + "'";
-			}),
-			dest(config.bump.php.dest),
+			} ),
+			dest( config.bump.php.dest ),
 		],
-		done()
+		errorHandler
 	);
 }
 
@@ -421,17 +433,18 @@ function bumpPHP(done) {
  * Task: `bumpTXT`
  *
  * Copy package.json version in readme.txt.
+ *
  */
-function bumpTXT(done) {
+function bumpTXT() {
 	return pipeline(
 		[
-			src(config.bump.txt.src),
-			replace(/Stable tag: (.{5})/g, function () {
+			src( config.bump.txt.src ),
+			replace( /Stable tag: (.{5})/g, function () {
 				return 'Stable tag: ' + packageVersion;
-			}),
-			dest(config.bump.txt.dest),
+			} ),
+			dest( config.bump.txt.dest ),
 		],
-		done()
+		errorHandler
 	);
 }
 
@@ -439,23 +452,24 @@ function bumpTXT(done) {
  * Task: `renameMainFile`
  *
  * Init the widget folder by the main class file.
+ *
  */
-function renameMainFile(done) {
+function renameMainFile() {
 	return pipeline(
 		[
-			src(config.init.file.main, { base: './' }),
-			vinylPaths(del),
-			rename({
+			src( config.init.file.main, { base: './' } ),
+			vinylPaths( del ),
+			rename( {
 				basename: 'class-' + config.init.packageName.toLowerCase(),
-			}),
-			dest(config.init.dest),
-			notify({
+			} ),
+			dest( config.init.dest ),
+			notify( {
 				title: 'renameMainFile task complete',
 				message: 'Main class file has been renamed.',
 				onLast: config.notify.onLastOption,
-			}),
+			} ),
 		],
-		done()
+		errorHandler
 	);
 }
 
@@ -463,24 +477,25 @@ function renameMainFile(done) {
  * Task: `renameAdminFile`
  *
  * Init the widget folder by the admin partial file.
+ *
  */
-function renameAdminFile(done) {
+function renameAdminFile() {
 	return pipeline(
 		[
-			src(config.init.file.admin, { base: './' }),
-			vinylPaths(del),
-			rename({
+			src( config.init.file.admin, { base: './' } ),
+			vinylPaths( del ),
+			rename( {
 				basename:
 					config.init.packageName.toLowerCase() + '-admin-display',
-			}),
-			dest(config.init.dest),
-			notify({
+			} ),
+			dest( config.init.dest ),
+			notify( {
 				title: 'renameAdminFile task complete',
 				message: 'Admin partial file has been renamed.',
 				onLast: config.notify.onLastOption,
-			}),
+			} ),
 		],
-		done()
+		errorHandler
 	);
 }
 
@@ -488,24 +503,25 @@ function renameAdminFile(done) {
  * Task: `renamePublicFile`
  *
  * Init the widget folder by the public partial file.
+ *
  */
-function renamePublicFile(done) {
+function renamePublicFile() {
 	return pipeline(
 		[
-			src(config.init.file.public, { base: './' }),
-			vinylPaths(del),
-			rename({
+			src( config.init.file.public, { base: './' } ),
+			vinylPaths( del ),
+			rename( {
 				basename:
 					config.init.packageName.toLowerCase() + '-public-display',
-			}),
-			dest(config.init.dest),
-			notify({
+			} ),
+			dest( config.init.dest ),
+			notify( {
 				title: 'renamePublicFile task complete',
 				message: 'Public partial file has been renamed.',
 				onLast: config.notify.onLastOption,
-			}),
+			} ),
 		],
-		done()
+		errorHandler
 	);
 }
 
@@ -513,71 +529,74 @@ function renamePublicFile(done) {
  * Task: `replaceWidgetInfo`
  *
  * Init the widget folder by replacing some placeholders.
+ *
  */
-function replaceWidgetInfo(done) {
+function replaceWidgetInfo() {
 	return pipeline(
 		[
-			src(config.init.src, { base: './' }),
-			replace('Firstname Lastname', function () {
+			src( config.init.src, { base: './' } ),
+			replace( 'Firstname Lastname', function () {
 				return config.init.authorName;
-			}),
-			replace('your@email.com', function () {
+			} ),
+			replace( 'your@email.com', function () {
 				return config.init.authorEmail;
-			}),
-			replace('https://www.yourWebsite.com/', function () {
+			} ),
+			replace( 'https://www.yourWebsite.com/', function () {
 				return config.init.authorUrl;
-			}),
-			replace('(WordPress.org usernames)', function () {
+			} ),
+			replace( '(WordPress.org usernames)', function () {
 				return config.init.contributors;
-			}),
-			replace('2020 Company Name', function () {
+			} ),
+			replace( '2020 Company Name', function () {
 				return config.init.copyright;
-			}),
-			replace('Your widget name', function () {
+			} ),
+			replace( 'Your widget name', function () {
 				return config.init.name;
-			}),
-			replace('Your widget description.', function () {
+			} ),
+			replace( 'Your widget description.', function () {
 				return config.init.description;
-			}),
-			replace('Your-Package-Name', function () {
+			} ),
+			replace( 'Your-Package-Name', function () {
 				return config.init.packageName;
-			}),
-			replace('Your_Package_Name', function () {
-				return config.init.packageName.replace(/-/g, '_');
-			}),
-			replace('your-package-name', function () {
+			} ),
+			replace( 'Your_Package_Name', function () {
+				return config.init.packageName.replace( /-/g, '_' );
+			} ),
+			replace( 'your-package-name', function () {
 				return config.init.packageName.toLowerCase();
-			}),
-			replace('your_package_name', function () {
-				return config.init.packageName.toLowerCase().replace(/-/g, '_');
-			}),
-			replace('YourPrefix', function () {
+			} ),
+			replace( 'your_package_name', function () {
+				return config.init.packageName
+					.toLowerCase()
+					.replace( /-/g, '_' );
+			} ),
+			replace( 'YourPrefix', function () {
 				return config.init.prefix;
-			}),
-			replace('yourprefix', function () {
+			} ),
+			replace( 'yourprefix', function () {
 				return config.init.prefix.toLowerCase();
-			}),
-			replace('YOURPREFIX', function () {
+			} ),
+			replace( 'YOURPREFIX', function () {
 				return config.init.prefix.toUpperCase();
-			}),
-			replace('https://github.com/your/repo', function () {
+			} ),
+			replace( 'https://github.com/your/repo', function () {
 				return config.init.repo;
-			}),
-			replace('yourTextDomain', function () {
+			} ),
+			replace( 'yourTextDomain', function () {
 				return config.init.textDomain;
-			}),
-			replace('your-vendor-name', function () {
+			} ),
+			replace( 'your-vendor-name', function () {
 				return config.init.vendorName;
-			}),
-			dest(config.init.dest),
-			notify({
+			} ),
+			dest( config.init.dest ),
+			notify( {
 				title: 'replaceWidgetInfo task complete',
 				message:
 					'The placeholders have been replaced by your dotenv data.',
 				onLast: config.notify.onLastOption,
-			}),
+			} ),
 		],
-		done()
+		errorHandler
 	);
 }
 
@@ -585,27 +604,32 @@ function replaceWidgetInfo(done) {
  * Task: `watchFiles`
  *
  * Reload tasks when files change.
+ *
+ * @param {doneCallback} done The callback that handle the response.
  */
-function watchFiles(done) {
-	watch(config.styles.watch.public).on(
+function watchFiles( done ) {
+	watch( config.styles.watch.public ).on(
 		'change',
-		series(parallel(publicStyles, publicRtlStyles), reload)
+		series( parallel( publicStyles, publicRtlStyles ), reload )
 	);
-	watch(config.styles.watch.admin).on(
+	watch( config.styles.watch.admin ).on(
 		'change',
-		series(parallel(adminStyles, adminRtlStyles), reload)
+		series( parallel( adminStyles, adminRtlStyles ), reload )
 	);
-	watch(config.scripts.watch.public).on(
+	watch( config.scripts.watch.public ).on(
 		'change',
-		series(publicScripts, reload)
+		series( publicScripts, reload )
 	);
-	watch(config.scripts.watch.admin).on(
+	watch( config.scripts.watch.admin ).on(
 		'change',
-		series(adminScripts, reload)
+		series( adminScripts, reload )
 	);
-	watch(config.images.watch).on('change', series(images, reload));
-	watch(config.fonts.watch).on('change', series(moveFonts, reload));
-	watch(config.files.watch).on('change', series(compilePotFile, reload));
+	watch( config.images.watch ).on( 'change', series( images, reload ) );
+	watch( config.fonts.watch ).on( 'change', series( moveFonts, reload ) );
+	watch( config.files.watch ).on(
+		'change',
+		series( compilePotFile, reload )
+	);
 	done();
 }
 
@@ -624,15 +648,15 @@ const build = parallel(
 	compilePotFile
 );
 exports.build = build;
-exports.bump = parallel(bumpCSS, bumpPHP, bumpTXT);
-exports.default = series(clean, build);
+exports.bump = parallel( bumpCSS, bumpPHP, bumpTXT );
+exports.default = series( clean, build );
 exports.initWidget = replaceWidgetInfo;
 exports.renameFiles = parallel(
 	renameMainFile,
 	renameAdminFile,
 	renamePublicFile
 );
-exports.recompileCSS = parallel(publicStyles, publicRtlStyles);
+exports.recompileCSS = parallel( publicStyles, publicRtlStyles );
 exports.translate = compilePotFile;
-exports.watch = parallel(serve, watchFiles);
-exports.zipWidget = series(zipWidget);
+exports.watch = parallel( serve, watchFiles );
+exports.zipWidget = series( zipWidget );
