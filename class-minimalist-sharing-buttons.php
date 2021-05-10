@@ -16,7 +16,7 @@
  * Plugin Name:       Minimalist Sharing Buttons
  * Plugin URI:        https://github.com/ArmandPhilippot/minimalist-sharing-buttons-widget
  * Description:       Display sharing buttons as a widget.
- * Version:           1.0.1
+ * Version:           1.0.2
  * Requires at least: 5.2
  * Requires PHP:      7.2
  * Author:            Armand Philippot
@@ -39,7 +39,7 @@ if ( ! defined( 'ABSPATH' ) ) {
  * Start at version 1.0.0 and use SemVer - https://semver.org
  * Rename this for your plugin and update it as you release new versions.
  */
-define( 'MSBWIDGET_VERSION', '1.0.1' );
+define( 'MSBWIDGET_VERSION', '1.0.2' );
 
 /**
  * Class used to implement a Minimalist_Sharing_Buttons widget.
