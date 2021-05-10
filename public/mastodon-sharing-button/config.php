@@ -24,7 +24,9 @@ $msb_token_key = $msbwidget_api_token ? $msbwidget_api_token : '';
 
 
 /**
- * The path where the cached instances list must be written.
+ * The path where the cached instances list must be written. This path must
+ * exist. Default is `../cache/instances-list.php`. The cache folder must be
+ * created.
  */
 $msb_instances_path = dirname( __DIR__ ) . '/cache/instances-list.php';
 
